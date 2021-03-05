@@ -1,0 +1,15 @@
+# plugin properties:
+plugin.beanshellbis.BeanShellBisPlugin.name=BeanShellBis
+plugin.beanshellbis.BeanShellBisPlugin.author=ZiKr
+plugin.beanshellbis.BeanShellBisPlugin.version=0.1
+plugin.beanshellbis.BeanShellBisPlugin.activate=startup
+
+# dependencies:
+plugin.beanshellbis.BeanShellBisPlugin.depend.0=jdk 1.8
+plugin.beanshellbis.BeanShellBisPlugin.depend.1=jedit 05.04.00.00
+
+# plugin HELP:
+plugin.beanshellbis.BeanShellBisPlugin.docs=docs/index.html
+# text appearing at the bottom of "Plugin Manager" window:
+plugin.beanshellbis.BeanShellBisPlugin.description=Plugin presents a 'free' wrapper of BeanShell interpreter within jEdit.
+

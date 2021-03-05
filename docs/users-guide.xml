@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><book>
+	<bookinfo>
+		<title>BeanShell Interpreter Bis</title>
+		<author>
+			<personname id="pn1">
+				<firstname>Zigmantas</firstname><surname>Kry&#382;ius</surname>
+			</personname>
+		</author>
+	</bookinfo>
+	<chapter id="overview"><title>Overview</title>
+		<para>
+			The BeanShell Interpreter Bis plugin (<code>BeanShellBis.jar</code>) provides an interface to the instance of jEdit's inner BeanShell interpreter in the way that allows to render suitably written BeanShell scripts into jEdit plugins.
+		</para>
+		<para>
+			With this interface, a BeanShell script becomes the main body of jEdit's plugin, and methods of the BeanShell scripted object become dockable(s) or actions of this jEdit's plugin. 
+		</para>
+		<para>
+			In the namespace of the BeanShellBis interpreter, the same packages are imported and the same variables are set, as for the inner jEdit's BeanShell script interpreter. 
+		</para>
+	</chapter>
+	<chapter id="use"><title>Use</title>
+		<para>
+			The use of this plugin is illustrated in the demo BeanShellObj plugin.
+		</para>
+		<para>
+		Objects of type <code>BshMethod</code> are accessed via <code>getMethods()</code> applied to the interpreter's namespace. Then, <code>invoke()</code> is applied to an object of type <code>BshMethod</code>. 
+		</para>
+	</chapter>
+	<chapter id="feedback"><title>Contacts</title>
+		<para>
+			Author's contact: <email id="email">zigmas.kr@gmail.com</email>.
+		</para>
+	</chapter>
+</book>

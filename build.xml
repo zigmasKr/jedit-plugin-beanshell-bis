@@ -1,0 +1,151 @@
+<?xml version="1.0" ?>
+<project name="BeanShellBis" default="package" basedir=".">
+
+	<!-- <echo message="${os.name}" /> -->
+	<condition property="os.nickname" value="win">
+		<os family="windows" />
+	</condition>
+	<condition property="os.nickname" value="lin">
+		<os family="unix" />
+	</condition>
+	<condition property="os.nickname" value="mac">
+		<os family="mac" />
+	</condition>
+	<!-- <echo message="os nickname is ${os.nickname}"/> -->
+
+	<property file="build-${os.nickname}.properties" />
+	<!--
+	<property file="../build.properties" />
+	<property file="${user.home}/build.properties" />
+	-->
+
+	<property name="compiler.source" value="1.8" />
+	<property name="compiler.target" value="1.8" />
+	<property name="src.dir" value="src" />
+
+	<!-- the directory for the compiled classes. Files in this directory
+	will be included in the finished jar file. -->
+	<property name="classes.dir" location="classes" />
+	<!-- class name for 'main' to run as application -->
+	<property name="main.class" value="beanshellbis.BeanShellBisRun"/>
+
+	<!-- Documentation process
+	none: if you supply your own html file as this template does.
+	xsltproc: if you plan on using docbook
+	-->
+
+	<property name="docs-proc.target" value="xsltproc" />
+	<property name="plugin.version" value="0.1" />
+
+	<!-- jEdit installation properties. -->
+	<!-- already defined in build.properties:
+	<property name="build.support" value="build-support" />
+	-->
+	<import file="${build.support}/plugin-build.xml" />
+
+	<!-- custom: -->
+	<property name="jedit.plugins.dir" value="${jedit.install.dir}/jars"/>
+	<property name="jedit.user.plugins.dir" value="${jedit.user.home}/jars"/>
+
+	<!--
+	This selector defines the files that will be
+	compiled by the "compile" target. Define here which
+	files under ${src.dir} will be compiled when the
+	"compile" task is called.
+	<selector id="compileFiles">
+		<filename name="*.java" />
+	</selector>
+	-->
+
+	<selector id="extraFiles">
+		<and>
+			<or>
+				<filename name="*.props" />
+				<filename name="*.xml" />
+				<!-- <filename name="${build.support}/plugin-build.xml" />  -->
+			</or>
+			<not>
+				<filename name="build.xml" />
+			</not>
+		</and>
+	</selector>
+
+	<!-- Add your plugin's specific dependencies here -->
+	<path id="project.class.path">
+		<!-- Dependencies that are bundled with your plugin.
+		These should also be represented in your props file under the,
+		"plugin.[plugin class].jars" property. -->
+		<!-- <pathelement location="${jedit.plugins.dir}/Console.jar"/> -->
+	</path>
+
+	<target name="build.prepare">
+		<!-- Copy over required dependencies to install.dir
+		<copy todir="${install.dir}">
+			<fileset dir="lib">
+				<filename name="*.jar"/>
+			</fileset>
+		</copy>
+		-->
+	</target>
+
+	<!-- =====================================
+	Builds the plugin JAR file (inluding docs)
+	====================================== -->
+	<!--
+	<target name="build"
+			depends="build.prepare,compile"
+			description="Builds the plugin JAR file (inluding docs)">
+
+		<mkdir dir="${build.classes}" />
+		<delete dir="${build.docs}" failonerror="false" />
+		<mkdir dir="${build.docs}" />
+		<delete dir="${build.extras}" failonerror="false" />
+		<mkdir dir="${build.extras}" />
+		<mkdir dir="${install.dir}" />
+
+		<copy todir="${build.docs}/docs" includeEmptyDirs="false">
+			<fileset dir="${basedir}/docs">
+				<selector refid="docsFiles" />
+			</fileset>
+		</copy>
+
+		<copy todir="${build.extras}" includeEmptyDirs="false">
+			<fileset dir="${basedir}">
+				<selector refid="extraFiles" />
+			</fileset>
+		</copy>
+
+		<jar jarfile="${install.dir}/${jar.file}">
+			<fileset dir="${build.classes}">
+				<selector refid="classesForPlugin" />
+			</fileset>
+			<fileset dir="${build.docs}" />
+			<fileset dir="${build.extras}" />
+		</jar>
+
+		<antcall target="build.post" />
+
+	</target>
+	-->
+
+	<!-- ========================================
+	TARGET: run
+	Runs the application, for testing
+	========================================= -->
+	<target name="run"
+			depends="build.prepare,compile"
+			description="Runs the application">
+		<java classname="${main.class}" fork="true">
+			<classpath>
+				<pathelement path="${classpath}" />
+				<pathelement location="${build.classes}" />
+			</classpath>
+		</java>
+	</target>
+
+</project>
+<!-- ::mode=xml:: -->
+
+<!--
+d:\tools\apache-ant-1.10.9\bin\ant.bat
+-->
